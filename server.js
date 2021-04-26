@@ -2,28 +2,10 @@ const http = require('http');
 const fs = require('fs');
 const { resolveNaptr } = require('dns');
 const _ = require('lodash');
+const app = require('./app.js');
 
-const server = http.createServer((req, res) => {
-    console.log(req.url, req.method);
+const port = process.env.PORT || 3000;
 
-    //lodash
-    const num = _.random(0,20);
-    console.log(num);
+const server = http.createServer(app);
 
-    //Sending the HTML file
-    fs.readFile('./view/index.html', (err, data) => {
-        try {
-            res.write(data);
-            res.end();
-        }
-        catch (err){
-            console.log(err);
-            res.end();
-        }
-    }) 
-    
-});
-
-server.listen(3000, 'localhost', () => {
-    console.log('listening for requests');
-});
+server.listen(port);
