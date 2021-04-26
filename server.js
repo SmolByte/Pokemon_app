@@ -10,9 +10,6 @@ const server = http.createServer((req, res) => {
     const num = _.random(0,20);
     console.log(num);
 
-    //Setting content header type
-    res.setHeader('Content-Type', 'text/html');
-
     //Sending the HTML file
     fs.readFile('./view/index.html', (err, data) => {
         try {
