@@ -15,9 +15,11 @@ var ObjectId = require('mongodb').ObjectID;
 const pokeRoutes = require('./routes/poke_routes');
 const userRoutes = require('./routes/user_routes');
 
-//Routes and what requests they will handle 
+//Setting up the views
 app.set('views', './views');
 app.set('view engine', 'pug');
+
+//Connecting the different routes to their files
 app.use('/pokemon', pokeRoutes);
 app.use('/user', userRoutes);
 
