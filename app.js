@@ -1,3 +1,6 @@
+/**
+ * Author: Nikhil Parikh
+ */
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -7,7 +10,7 @@ const mongoose = require('mongoose');
 const pokeRoutes = require('./routes/poke_routes');
 const userRoutes = require('./routes/user_routes');
 
-mongoose.connect('mongodb+srv://nparikh:whosThatPokemond@cluster0.d8ofr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://nparikh:' + process.env.mongoPassword + '@cluster0.d8ofr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useMongoClient: true
 }
 );

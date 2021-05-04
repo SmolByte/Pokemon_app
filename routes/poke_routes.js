@@ -8,13 +8,13 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
-        message: "Handling GET requests to /products"
+        message: "Handling GET requests to /pokemon"
     });
 });
 
 router.post('/', (req, res, next) => {
     res.status(200).json({
-        message: "Handling POST requests to /products"
+        message: "Handling POST requests to /pokemon"
     });
 });
 
