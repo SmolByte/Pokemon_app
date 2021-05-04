@@ -22,7 +22,7 @@ router.get('/:pokeID', (req, res, next) =>{
     const pokeId = req.params.pokeID;
     if (pokeId === 'special'){
         res.status(200).json({
-            message: 'You have found the hidden gem'
+            message: 'You have found the ultimate hidden gem'
         });
     } else {
         res.status(200).json({
