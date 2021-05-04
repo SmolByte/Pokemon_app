@@ -33,6 +33,7 @@ router.param('pokeID', function(req, res, next, value){
 
 router.get('/:pokeID', async function(req, res){
    try {
+       console.log(req.params.pokeID);
        let result = await pokeCol.findOne({_id: ObjectID(req.params.pokeID)});
        console.log(result);
 

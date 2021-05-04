@@ -22,7 +22,7 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 //Connecting the different routes to their files
-app.use('/pokemon', pokeRoutes);
+//app.use('/pokemon', pokeRoutes);
 app.use('/user', userRoutes);
 
 //GET ROUTES
@@ -37,6 +37,20 @@ app.get('/login', function(req, res, next){
 app.get('/search', function(req, res, next){
     res.render('search');
 })
+
+const pokeID = 111;
+
+app.get('/pokemon/:pokeID', async function(req, res){
+   try {
+       console.log(req.params.pokeID);
+       let result = await pokeCol.findOne({_id: pokeID});
+       console.log(result);
+
+       res.render('pokemon', {pokemonName: result.name})
+   } catch(e){
+       console.log(e.message);
+   }
+});
 
 app.listen(3000, async () =>{
     try {
