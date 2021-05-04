@@ -12,10 +12,10 @@ const pokeSchema = new mongoose.Schema({
     // stats: String,
     // species: String,
     // moves: String,
-    img: {
-        data: Buffer, 
-        contentType: String
-    }
+    //img: {
+    //     data: Buffer, 
+    //     contentType: String
+    // }
 
 });
 

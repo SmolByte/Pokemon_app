@@ -1,0 +1,15 @@
+extends layout
+block content
+    body
+      h2 Search for a pokemon
+      form(method="post")
+      select(name="pokemon")
+        option(value="pokemon.name") pokemon name
+      input(name="value")
+      br
+      input(type="submit" value="Search!")
+      |
+      input(type="reset" value="Clear!")
+
+      if results
+        h3 Activity Search Results for #{results}

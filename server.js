@@ -4,7 +4,6 @@
 const http = require('http');
 const fs = require('fs');
 const { resolveNaptr } = require('dns');
-const _ = require('lodash');
 const app = require('./app.js');
 
 const port = process.env.PORT || 3000;
