@@ -1,0 +1,3 @@
+class Pokemon {
+    constructor(name, )
+}

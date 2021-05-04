@@ -19,4 +19,5 @@ const pokeSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Pokemon', pokeSchema);
+const pokeCol = mongoose.model('Pokemon', pokeSchema);
+module.exports = pokeCol;
