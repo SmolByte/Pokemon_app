@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 const mongoose = require('mongoose');
 
 const pokeSchema = new mongoose.Schema({
