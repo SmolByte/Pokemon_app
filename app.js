@@ -7,11 +7,13 @@ const express = require('express');
 const app = express();
 var qString = require('querystring');
 
-//let dbManager = require('./dbManager');
+//Setting up the database connections
+let dbManager = require('./pokeDb');
 const mongoose = require('mongoose');
 var ObjectId = require('mongodb').ObjectID;
+const pokeCol = require('./models/pokeSchema');
 
-//Connecting the routes to their files
+//Connecting the route files to this file
 const pokeRoutes = require('./routes/poke_routes');
 const userRoutes = require('./routes/user_routes');
 
@@ -23,15 +25,25 @@ app.set('view engine', 'pug');
 app.use('/pokemon', pokeRoutes);
 app.use('/user', userRoutes);
 
+//GET ROUTES
 app.get('/', function(req, res){
     res.render('index');
 });
 
-app.use('/search', function(req, res, next){
+app.get('/login', function(req, res, next){
+    res.render('login');
+})
+
+app.get('/search', function(req, res, next){
     res.render('search');
 })
 
-app.listen(3000, function(){
+app.listen(3000, async () =>{
+    try {
+        await mongoose.connect("mongodb+srv://nparikh:whosThatPokemon@cluster0.d8ofr.mongodb.net/pokemonProject?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
+    } catch(e){
+        console.log(e.message);
+    }
     console.log('Server started from app.js on port 3000');
 })
 // app.use((req, res, next) => {

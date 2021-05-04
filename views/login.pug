@@ -1,29 +1,31 @@
 //-Author Shahriar Majid
-extends index 
+extends layout
 
 block content
-div.text-center
-        form(class="form-signin" method="POST" action="/users/login")
-            #error
-                if error
-                    p.text-danger Error!!!
-            h1(class=h1Classes) Sign in to Save your pokemon!
-            //-input email
-            label( for="inputEmail" class="sr-only") Email address
-            input(type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus)
-            //-input password
-            label(for="inputPassword" class="sr-only") Password
-            input(type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required)
-            //-remember Checkbox
-            - var divClasses=['checkbox', 'mb-3'];
-            div(class=divClasses)
-                label
-                    input(type="checkbox" value="remember-me")
-                    span Remember me  
-            //-LogIn button
-            - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
-            button(class=buttonClass type="submit") Log in
-            - var pClasses=['mt-5', 'mb-3', 'text-muted'];
-            //-SignUp button
-            - var buttonCLass=['btn','btn-lg','btn-primary,btn-block'];
-            button(class=buttonClass type="href='/signUpPage") Sign Up
+
+    body
+        div.text-center
+            form(class="form-signin" method="POST" action="/users/login")
+                #error
+                    if error
+                        p.text-danger Error!!!
+                h1(class=h1Classes) Sign in to Save your pokemon!
+                //-input email
+                label( for="inputEmail" class="sr-only") Email address
+                input(type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus)
+                //-input password
+                label(for="inputPassword" class="sr-only") Password
+                input(type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required)
+                //-remember Checkbox
+                - var divClasses=['checkbox', 'mb-3'];
+                div(class=divClasses)
+                    label
+                        input(type="checkbox" value="remember-me")
+                        span Remember me  
+                //-LogIn button
+                - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
+                button(class=buttonClass type="submit") Log in
+                - var pClasses=['mt-5', 'mb-3', 'text-muted'];
+                //-SignUp button
+                - var buttonCLass=['btn','btn-lg','btn-primary,btn-block'];
+                button(class=buttonClass type="href='/signUpPage") Sign Up

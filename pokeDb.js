@@ -25,6 +25,7 @@ var connect = async function(dbName){
     } catch(e){
         console.log(e.message);
         }
+        console.log("did something");
 }
 
 database.get = function(dbName){
@@ -44,3 +45,5 @@ database.close = async function(){
         console.log(e.mesage);
     }
 }
+
+module.exports = database;
