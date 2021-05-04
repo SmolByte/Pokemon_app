@@ -2,10 +2,10 @@
   "name": "pokemonapp",
   "version": "1.0.0",
   "description": "App for finding pokemon",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,6 @@
     "express": "^4.17.1",
     "lodash": "^4.17.21",
     "mongoose": "^5.12.5",
-    "morgan": "^1.10.0",
     "pug": "^3.0.2"
   }
 }

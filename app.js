@@ -22,11 +22,15 @@ app.use('/pokemon', pokeRoutes);
 app.use('/user', userRoutes);
 
 app.get('/', function(req, res){
-    res.end('<html><body><br><br><a href="/insert">home</a>&emsp;&emsp;<a href="/search">search page</a></body></html>');
+    res.render('index');
 });
 
 app.use('/search', function(req, res, next){
     res.render('search');
+})
+
+app.listen(3000, function(){
+    console.log('Server started from app.js on port 3000');
 })
 // app.use((req, res, next) => {
 //     const error = new Error('Not Found!');
