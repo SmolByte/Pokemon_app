@@ -39,6 +39,7 @@ app.get('/search', function(req, res, next){
 })
 
 app.get('/pokemon/:pokeID', async function(req, res){
+    console.log(req.params.pokeID);
     try {
         console.log("searching!");
         res.render('pokemon');
@@ -46,16 +47,6 @@ app.get('/pokemon/:pokeID', async function(req, res){
         console.log(e.message);
     }
  });
-
-const pokeID = "111";
-
-app.post('/pokemon/:pokeID', async function(req, res){
-   try {
-       console.log("searching!");
-   } catch(e){
-       console.log(e.message);
-   }
-});
 
 app.listen(3000, async () =>{
     try {
