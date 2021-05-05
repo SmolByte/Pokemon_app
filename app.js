@@ -1,5 +1,5 @@
 /**
- * Author: Nikhil Parikh
+ * Author: Nikhil Parikh & Gurjinder Singh
  */
 
  //Creating an instance of the express routing app

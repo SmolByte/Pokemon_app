@@ -1,5 +1,5 @@
 /**
- * The routes to access the different specific pokemon 
+ * The routes to access the different specific users
  * 
  * @authors: Nikhil Parikh, Xavier Williams 
  */
