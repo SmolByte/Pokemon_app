@@ -1,7 +1,11 @@
 extends layout 
 block content 
     body
-        h2 Pokemon name: #{pokemonName}
-
+        h2 Pokemon name: #{curPokemon.name}
+        
+        h1 Pokemon number: #{curPokemon.pokedexNum}
+        h1 Pokemon type: #{curPokemon.type}
+        h1 Pokemon weight: #{curPokemon.weight}
+        //- h1 Pokemon stats: #{curPokemon.pokedexNum}
         #{results}
             
