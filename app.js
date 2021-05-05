@@ -93,22 +93,24 @@ app.get('/pokemon/:pokeID', async function(req, res){
                  } else {
                      const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + postParams.value;
                      let curPokemon = {};
-                     fetch(apiUrl)
-                     .then((response) => {
-                         return response.json()
-                     })
-                     .then((pokemon) => {
+                     async function fetchPokemon(apiUrl){
+                         const response = await fetch('apiUrl');
+                         const pokemon = await response.json();
+                         return pokemon;
+                     }
+                     fetchPokemon().then((pokemon) => {
                          curPokemon.name = pokemon.name;
                          curPokemon.pokedexNum = pokemon.id;
-                         curPokemon.type = pokemon.types[0].name;
+                         curPokemon.type = pokemon.types[0].type.name;
                          curPokemon.weight = pokemon.weight;
                          console.log(curPokemon.name);
                          res.render('pokemon', {curPokemon});
-                         console.log(pokemon);
+                         console.log(curPokemon);
                      })
-                     .catch((error) => {
-                         console.log(error);
-                     })
+                     .catch((err)=>{
+                         console.log(err);
+                     });
+                     await pokeCol.create({_id: curPokemon.id, name: curPokemon.name, type: curPokemon.type, weight: curPokemon.weight});
                      
                  }
 
@@ -127,9 +129,11 @@ app.get('/pokemon/:pokeID', async function(req, res){
 
 app.listen(3000, async () =>{
     try {
-        await mongoose.connect("mongodb+srv://nparikh:whosThatPokemon@cluster0.d8ofr.mongodb.net/pokemonProject?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true }, (req, res) => {
-            console.log("Connected to database");
-        })
+        // const mongoUri = "mongodb+srv://nparikh:pokemon123@cluster0.d80fr.mongodb.net/pokemonProject?retryWrites=true&w=majority";
+        // await mongoose.connect(mongoUri, { useUnifiedTopology: true, useNewUrlParser: true }, (req, res) => {
+        //     console.log("Connected to database");
+        // })
+        mongoose.connect('mongodb://localhost:27017/myapp', {useUnifiedTopology: true, useNewUrlParser: true});
     } catch(e){
         console.log(e.message);
     }
