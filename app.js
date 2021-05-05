@@ -38,15 +38,20 @@ app.get('/search', function(req, res, next){
     res.render('search');
 })
 
-const pokeID = 111;
-
 app.get('/pokemon/:pokeID', async function(req, res){
-   try {
-       console.log(req.params.pokeID);
-       let result = await pokeCol.findOne({_id: pokeID});
-       console.log(result);
+    try {
+        console.log("searching!");
+        res.render('pokemon');
+    } catch(e){
+        console.log(e.message);
+    }
+ });
 
-       res.render('pokemon', {pokemonName: result.name})
+const pokeID = "111";
+
+app.post('/pokemon/:pokeID', async function(req, res){
+   try {
+       console.log("searching!");
    } catch(e){
        console.log(e.message);
    }
