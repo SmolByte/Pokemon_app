@@ -6,12 +6,14 @@
 const express = require('express');
 const app = express();
 var qString = require('querystring');
+const fetch = require("node-fetch");
 
 //Setting up the database connections
 let dbManager = require('./pokeDb');
 const mongoose = require('mongoose');
 var ObjectId = require('mongodb').ObjectID;
 const pokeCol = require('./models/pokeSchema');
+const Pokemon = require('./pokemon');
 
 var postParams;
 function moveOn(postData){
@@ -90,17 +92,18 @@ app.get('/pokemon/:pokeID', async function(req, res){
                 res.render('pokemon', {results: resultOBJ});
                  } else {
                      const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + postParams.value;
-                     const tempPokemon = new Pokemon();
+                     let curPokemon = {};
                      fetch(apiUrl)
                      .then((response) => {
                          return response.json()
                      })
                      .then((pokemon) => {
-                         tempPokemon.name = pokemon.name;
-                         tempPokemon.pokedexNum = pokemon.id;
-                         tempPokemon.type = pokemon.types[0].name;
-                         tempPokemon.weight = pokemon.weight;
-                         res.render('pokeinfo', {tempPokemon});
+                         curPokemon.name = pokemon.name;
+                         curPokemon.pokedexNum = pokemon.id;
+                         curPokemon.type = pokemon.types[0].name;
+                         curPokemon.weight = pokemon.weight;
+                         res.render('pokeinfo', {curPokemon});
+                         console.log(pokemon);
                      })
                      .catch((error) => {
                          console.log(error);
