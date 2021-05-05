@@ -76,6 +76,7 @@ app.get('/pokemon/:pokeID', async function(req, res){
                  let cursor;
                  if (prop == "pokeID"){
                      cursor = await pokeCol.find({pokedexNum: val});
+                     console.log(cursor);
                  } else {
                      cursor = await pokeCol.find({name: val});
                  }
@@ -100,7 +101,7 @@ app.get('/pokemon/:pokeID', async function(req, res){
                      .then((pokemon) => {
                          curPokemon.name = pokemon.name;
                          curPokemon.pokedexNum = pokemon.id;
-                         curPokemon.type = pokemon.types[1].type.name;
+                         curPokemon.type = pokemon.types[0].type.name;
                          curPokemon.weight = pokemon.weight;
                          console.log(curPokemon.name);
                          res.render('pokemon', {curPokemon});
@@ -137,7 +138,7 @@ app.listen(3000, async () =>{
         console.log(e.message);
     }
     console.log('Server started from app.js on port 3000');
-})
+});
 // app.use((req, res, next) => {
 //     const error = new Error('Not Found!');
 //     error.status(404);
