@@ -28,13 +28,22 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/:pokeID', async function(req, res){
+    const pokeName = "";
    try {
        //console.log(req.params.pokeID);
        let result = await pokeCol.findById(req.params.pokeID);
        if (result == null){
-           fetch()
+           const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + req.params.pokeID;
+           fetch(apiUrl)
+            .then((response) => {
+                return response.json();
+            })
+            .then((pokemon)=>{
+                name = pokemon.name;
+                console.log(pokemon.name);
+            })
        }
-       res.render('pokemon', {pokemonName: result.name})
+       res.render('pokemon', {pokemonName: name})
    } catch(e){
        console.log(e.message);
    }
