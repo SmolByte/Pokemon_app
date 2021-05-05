@@ -2,12 +2,15 @@ extends layout
 block content
     body
       h2 Search for a pokemon
-      form(method="POST", action='/pokemon/#{pokeID}')
-      
-      br
-      input(type="submit" value="Search!")
-      |
-      input(type="reset" value="Clear!")
+      form(method="POST")
+        select(name="prop")
+          option(value="pokeID") Search by ID
+          option(value="pokeName") Search by name
+        input(name="value")
+        br
+        input(type="submit" value="Search!")
+        |
+        input(type="reset" value="Clear!")
 
       if results
         h3 Pokemon #{results}

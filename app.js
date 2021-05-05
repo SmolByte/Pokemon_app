@@ -13,6 +13,18 @@ const mongoose = require('mongoose');
 var ObjectId = require('mongodb').ObjectID;
 const pokeCol = require('./models/pokeSchema');
 
+var postParams;
+function moveOn(postData){
+    let proceed = true;
+    postParams = qString.parse(postData);
+    for (property in postParams){
+        if (postParams[property].toString().trim() == ''){
+            proceed = false;
+        }
+    }
+    return proceed;
+}
+
 //Connecting the route files to this file
 const pokeRoutes = require('./routes/poke_routes');
 const userRoutes = require('./routes/user_routes');
@@ -47,6 +59,67 @@ app.get('/pokemon/:pokeID', async function(req, res){
         console.log(e.message);
     }
  });
+
+ app.post('/search', function(req, res){
+     postData = '';
+     req.on('data', (data) => {
+         postData += data;
+     });
+     req.on('end', async ()=>{
+         console.log(postData);
+         if(moveOn(postData)){
+             var prop = postParams.prop;
+             var val = postParams.value;
+             try {
+                 let cursor;
+                 if (prop == "pokeID"){
+                     cursor = await pokeCol.find({pokedexNum: val});
+                 } else {
+                     cursor = await pokeCol.find({name: val});
+                 }
+                console.log(cursor);
+                if (cursor === ""){
+                let data = [];
+                await cursor.forEach((item) =>{
+                    let curPokemon = {};
+                    curPokemon = new Pokemon(item.name, item.pokedexNum, item.type, item.weight);
+                    data.push(curPokemon);
+                })
+                let resultOBJ = {dataArr: data, [prop] : val, prop: prop};
+                console.log("resultOBJ is currently" + resultOBJ);
+                res.render('pokemon', {results: resultOBJ});
+                 } else {
+                     const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + postParams.value;
+                     const tempPokemon = new Pokemon();
+                     fetch(apiUrl)
+                     .then((response) => {
+                         return response.json()
+                     })
+                     .then((pokemon) => {
+                         tempPokemon.name = pokemon.name;
+                         tempPokemon.pokedexNum = pokemon.id;
+                         tempPokemon.type = pokemon.types[0].name;
+                         tempPokemon.weight = pokemon.weight;
+                         res.render('pokeinfo', {tempPokemon});
+                     })
+                     .catch((error) => {
+                         console.log(error);
+                     })
+                     
+                 }
+
+             } catch (e){
+                 console.log(e.message);
+                 res.writeHead(404);
+                 res.write("<html><body><h1> ERROR 404. PAGE NOT FOUND</h1>");
+                 res.end("<br>" + e.message + "<br></body></html>");
+
+             }
+         } else {
+             res.render('search');
+         }
+     })
+ })
 
 app.listen(3000, async () =>{
     try {

@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const pokeSchema = new mongoose.Schema({
     _id: Number,
     name: String,
+    pokedexNum: Number,
     type: String, 
     weight: Number,
     // stats: String,
