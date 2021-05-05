@@ -3,11 +3,11 @@
  */
 const MongoClient = require('mongodb').MongoClient;
 var getID = require('mongodb').ObjectID();
-var url = "mongodb+srv://nparikh:whosThatPokemon@cluster0.d8ofr.mongodb.net/pokemonProject?retryWrites=true&w=majority";
+var url = "mongodb://localhost:27017/myapp";
 let database = {};
 let mongoClient  = MongoClient(url,{ useUnifiedTopology: true});
 let myDB;
-const dbName = "pokemonProject";
+const dbName = "pokemons";
 
 var connect = async function(dbName){
     try{

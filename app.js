@@ -126,6 +126,14 @@ app.get('/pokemon/:pokeID', async function(req, res){
          }
      })
  })
+ app.use('*', function(req, res){
+     res.writeHead(404);
+     res.end('<h1> ERROR 404. ${req.url} NOT FOUND<h1><br><br>');
+
+ });
+ app.use((err, req, res, next) => {
+     res.status(500).render('error', {message: err.message})
+ });
 
 app.listen(3000, async () =>{
     try {
