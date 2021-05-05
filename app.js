@@ -102,7 +102,8 @@ app.get('/pokemon/:pokeID', async function(req, res){
                          curPokemon.pokedexNum = pokemon.id;
                          curPokemon.type = pokemon.types[0].name;
                          curPokemon.weight = pokemon.weight;
-                         res.render('pokeinfo', {curPokemon});
+                         console.log(curPokemon.name);
+                         res.render('pokemon', {curPokemon});
                          console.log(pokemon);
                      })
                      .catch((error) => {
