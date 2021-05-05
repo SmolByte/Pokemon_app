@@ -4,9 +4,9 @@
  * @authors: Nikhil Parikh, Xavier Williams 
  */
 const express = require('express');
-const { isValidObjectId } = require('mongoose');
 const router = express.Router();
 const pokeCol = require('../models/pokeSchema');
+var ObjectID = require('mongodb').ObjectID;
 
 router.get('/', (req, res, next) => {
    res.render('pokemon', {
@@ -26,17 +26,11 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.param('pokeID', function(req, res, next, value){
-    console.log('Request for a specific Pokemon ' + value);
-    next();
-})
-
 router.get('/:pokeID', async function(req, res){
    try {
-       console.log(req.params.pokeID);
-       let result = await pokeCol.findOne({_id: ObjectID(req.params.pokeID)});
+       //console.log(req.params.pokeID);
+       let result = await pokeCol.find();
        console.log(result);
-
        res.render('pokemon', {pokemonName: result.name})
    } catch(e){
        console.log(e.message);

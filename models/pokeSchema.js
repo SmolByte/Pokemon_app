@@ -4,9 +4,8 @@
 const mongoose = require('mongoose');
 
 const pokeSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+    _id: Number,
     name: String,
-    num: Number,
     type: String, 
     weight: Number,
     // stats: String,

@@ -22,7 +22,7 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 //Connecting the different routes to their files
-//app.use('/pokemon', pokeRoutes);
+app.use('/pokemon', pokeRoutes);
 app.use('/user', userRoutes);
 
 //GET ROUTES
@@ -50,7 +50,9 @@ app.get('/pokemon/:pokeID', async function(req, res){
 
 app.listen(3000, async () =>{
     try {
-        await mongoose.connect("mongodb+srv://nparikh:whosThatPokemon@cluster0.d8ofr.mongodb.net/pokemonProject?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
+        await mongoose.connect("mongodb+srv://nparikh:whosThatPokemon@cluster0.d8ofr.mongodb.net/pokemonProject?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true }, (req, res) => {
+            console.log("Connected to database");
+        })
     } catch(e){
         console.log(e.message);
     }
