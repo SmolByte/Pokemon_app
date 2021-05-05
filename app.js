@@ -93,25 +93,24 @@ app.get('/pokemon/:pokeID', async function(req, res){
                  } else {
                      const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + postParams.value;
                      let curPokemon = {};
-                     async function fetchPokemon(apiUrl){
-                         const response = await fetch('apiUrl');
-                         const pokemon = await response.json();
-                         return pokemon;
-                     }
-                     fetchPokemon().then((pokemon) => {
+                     fetch(apiUrl)
+                     .then((response) => {
+                         return response.json()
+                     })
+                     .then((pokemon) => {
                          curPokemon.name = pokemon.name;
                          curPokemon.pokedexNum = pokemon.id;
-                         curPokemon.type = pokemon.types[0].type.name;
+                         curPokemon.type = pokemon.types[1].type.name;
                          curPokemon.weight = pokemon.weight;
                          console.log(curPokemon.name);
                          res.render('pokemon', {curPokemon});
+                         //await pokeCol.create({_id: curPokemon.id, name: curPokemon.name});
                          console.log(curPokemon);
                      })
-                     .catch((err)=>{
-                         console.log(err);
-                     });
-                     await pokeCol.create({_id: curPokemon.id, name: curPokemon.name, type: curPokemon.type, weight: curPokemon.weight});
-                     
+                     .catch((error) => {
+                         console.log(error);
+                     })
+                     await pokeCol.create({pokedexNum: curPokemon.id, name: curPokemon.name, type: curPokemon.type, weight: curPokemon.weight});
                  }
 
              } catch (e){
